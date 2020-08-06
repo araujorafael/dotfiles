@@ -1,0 +1,207 @@
+#+TITLE: Setup
+Fast machine setup
+
+** Set home-conf commands
+#+BEGIN_SRC shell
+echo ".cfg" >> .gitignore
+git clone --bare git@github.com:araujorafael/dotfiles.git $HOME/.cfg
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+#+END_SRC
+
+Now checkout the modified files
+#+BEGIN_SRC shell
+# BACKUP YOUR CURRENT CONFIG
+mkdir -p .config-backup && \
+config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+xargs -I{} mv {} .config-backup/{}
+
+# CHECKOUT FILES
+config checkout
+config config --local status.showUntrackedFiles no
+#+END_SRC
+
+** Core Things to install and config
+*** Update OS package manager
+**** Ubuntu/Debian
+#+BEGIN_SRC shell
+$ sudo apt-get update
+#+END_SRC
+
+*** Installing nerd-fonts and GIT
+$ mkdir ~/Projects && \
+  cd ~/Projects && \
+  git clone https://github.com/ryanoasis/nerd-fonts.git && \
+  cd nerd-fonts && \
+  ./install.sh FiraMono ProFont Gohu SourceCodePro Hack FiraCode Go-Mono Cousine
+#+END_src
+
+#+RESULTS:
+
+*** Installing Emacs
+#+BEGIN_SRC shell
+$ sudo apt-get install emacs
+#+END_SRC
+
+*** Install [[https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH][ZSH + OH MY ZSH!]]
+**** ZSH
+#+BEGIN_SRC shell
+$ apt install zsh -y
+$ zsh --version
+#+END_SRC
+
+Don't forget to make zsh your default terminal
+
+#+BEGIN_SRC shell
+$ chsh -s $(which zsh)
+#+END_SRC
+
+**** OH MY ZSH!
+#+BEGIN_SRC shell
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#+END_SRC
+
+*** Install [[https://brew.sh/][Homebrew for Linux]]
+Start ensuring you have all the dependencies
+
+**** Ubuntu/Debian
+#+BEGIN_SRC shell
+$ sudo apt-get install build-essential curl file git
+#+END_SRC
+
+Now install homebrew
+#+BEGIN_SRC shell
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+$ echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+#+END_SRC
+
+*** Install [[https://asdf-vm.com/#/core-manage-asdf-vm][asdf-vm]]
+#+BEGIN_SRC shell
+$ brew install asdf
+#+END_SRC
+
+** Languages and tools
+Easy way to install
+*** Langs
+**** Go
+#+BEGIN_SRC shell
+$ asdf plugin add golang
+$ asdf list all golang # list all versions avaliabe to install
+$ asdf install golang:<version>
+$ asdf global golang <installed-version>
+$ go version
+# go version go1.14.4 linux/amd64
+#+END_SRC
+
+Also add GOENV vars to the ~./zshenv~
+#+BEGIN_SRC shellenv
+GO111MODULE=on
+GOPATH=$HOME/golang
+GOBIN=$GOPATH/bin
+PATH=$PATH:$GOBIN
+#+END_SRC
+
+***** Tooling :D
+- ~gocode~ (for code completion & eldoc support)
+- ~godoc~ (for documentation lookup)
+- ~goimports~ (for auto-formating code on save and fixing imports)
+- ~gorename~ (for extra refactoring commands)
+- ~gore~ (For my REPL maniacs friends)
+- ~guru~ (for code navigation & refactoring commands)
+
+#+BEGIN_SRC shell
+$ go get -u github.com/motemen/gore && \
+  go get -u github.com/nsf/gocode && \
+  go get -u golang.org/x/tools/cmd/godoc && \
+  go get -u golang.org/x/tools/cmd/goimports && \
+  go get -u golang.org/x/tools/cmd/gorename && \
+  go get -u golang.org/x/tools/cmd/guru
+#+END_SRC
+
+**** Clojure
+#+BEGIN_SRC shell
+$ asdf plugin add java https://github.com/halcyon/asdf-java
+$ asdf install java latest
+$ asdf latest java
+# <version>
+$ asdf global java <version>
+
+$ asdf plugin add clojure
+$ asdf install clojure latest
+$ asdf latest clojure
+# <version>
+$ asdf global clojure <version>
+#+END_SRC
+
+*** Tools
+**** [[https://docs.docker.com/engine/install/ubuntu/][Docker]]
+Install dependencies
+#+BEGIN_SRC shell
+$  sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+#+END_SRC
+
+Add GPG key and add docker repo
+#+BEGIN_SRC shell
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+#+END_SRC
+
+Install docker engine
+#+BEGIN_SRC shell
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+$ sudo docker run --rm hello world
+#+END_SRC
+
+***** Post instalation
+Managing docker as a non-root user
+#+BEGIN_SRC shell
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+$ newgrp docker
+#+END_SRC
+Now you can run docker without sudo :D
+
+** IDE's and aesthetics changes
+*** [[https://github.com/romkatv/powerlevel10k][Powerline10k]]
+Clone the theme configuration
+#+BEGIN_SRC shell
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+#+END_SRC
+
+Set ~ZSH_THEME="powerlevel10k/powerlevel10k"~ on your ~./zshrc~
+
+*** [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
+/evil YEY!/
+Install the dependencies
+#+BEGIN_SRC shell
+# required dependencies
+apt-get install git ripgrep
+# optional dependencies
+apt-get install fd-find
+#+END_SRC
+
+Install doom
+#+BEGIN_SRC shell
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+#+END_SRC
+
+**** Post Installation
+Add doom binary to your path could make everything easier like kill demons with a shotgun
+#+BEGIN_SRC shellenv
+DOOMDIR=~/.doom.d
+EMACSDIR=~/.emacs.d
+PATH=$PATH:$EMACSDIR/bin
+#+END_SRC
+
+dont forget to run ~$ doom sync~
+**** Doom Configuration
+User reference files on ~doom.d~ dir
