@@ -1,0 +1,59 @@
+{
+  "_from": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+  "_id": "clojure-indent@0.10.0",
+  "_inBundle": false,
+  "_integrity": "sha512-E+Nr90LEKqj/rWYUHcI7K/51i3MlmuiqXTLya0kIT+7bl56lxCYAA0JL+XxaULlCCWFODzV1X3WbXbiNe1DMug==",
+  "_location": "/clojure-indent",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+  "_shasum": "ca6147b827cbd88675f0c542dd923f72b12123bb",
+  "_spec": "https://www.atom.io/api/packages/clojure-indent/versions/0.10.0/tarball",
+  "_where": "/tmp/apm-install-dir-120417-18580-1x6zw7v.yi44g",
+  "bugs": {
+    "url": "https://github.com/Ciebiada/clojure-indent/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Minimal Atom package for indenting Clojure code",
+  "devDependencies": {
+    "standard": "^10.0.2"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/Ciebiada/clojure-indent#readme",
+  "keywords": [
+    "clojure",
+    "indent",
+    "indenting",
+    "syntax"
+  ],
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "clojure-indent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ciebiada/clojure-indent.git"
+  },
+  "scripts": {
+    "standard": "standard"
+  },
+  "standard": {
+    "globals": [
+      "atom"
+    ]
+  },
+  "version": "0.10.0"
+}
