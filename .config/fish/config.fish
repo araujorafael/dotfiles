@@ -1,19 +1,18 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-    # Emacs vars
-    set -g EMACSDIR $HOME/.emacs.d
-    set -g DOOMDIR $HOME/.doom.d
-    set -g DOOMLOCALDIR $HOME/.emacs.d/.local
+  # Commands to run in interactive sessions can go here
+  neofetch
 
-    fish_add_path -gp $EMACSDIR/bin
+  # Emacs vars
+  set -g EMACSDIR $HOME/.emacs.d
+  set -g DOOMDIR $HOME/.doom.d
+  set -g DOOMLOCALDIR $HOME/.emacs.d/.local
 
-    # Load asdf to terminal session and add the autocomplete to fish
-    source ~/.asdf/asdf.fish
-    . ~/.asdf/plugins/java/set-java-home.fish
+  fish_add_path -gp $EMACSDIR/bin
 
-    # Add custom alias to deal with dotfiles
-    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+  # Load asdf to terminal session and add the autocomplete to fish
+  source ~/.asdf/asdf.fish
+  . ~/.asdf/plugins/java/set-java-home.fish
 
-    # load ssh-agent
-    eval (ssh-agent -c)
+  # Add custom alias to deal with dotfiles
+  alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 end
