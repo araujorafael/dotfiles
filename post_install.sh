@@ -57,7 +57,8 @@ else
 fi
 wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 mv lein $HOME/bin
-chmod a+x ~/bin/lein
+chmod a+x $HOME/bin/lein
+export PATH=$PATH:$HOME/bin
 lein
 
 asdf plugin-add nodejs
