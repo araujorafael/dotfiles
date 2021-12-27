@@ -1,0 +1,13 @@
+#+TITLE: Shortcuts
+
+* Some shortcuts
+** Definitions
+- =Meta= is the super
+
+** Shorcuts
+- =Meta + Enter= => Open terminal emulator
+- =Meta + Shift + c= => Clooses curretn window
+- =Meta + Shift + q= => Session Log out
+- =Meta + p= => Open app loouckher /(rofi or another)/
+- =Meta + s= => Open rofi ssh
+- =Alt + Tab= => Tooggle between open windows
