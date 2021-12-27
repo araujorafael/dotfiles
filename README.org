@@ -205,3 +205,4 @@ PATH=$PATH:$EMACSDIR/bin
 dont forget to run ~$ doom sync~
 **** Doom Configuration
 User reference files on ~doom.d~ dir
+
