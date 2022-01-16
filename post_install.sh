@@ -17,7 +17,10 @@ pamac install --no-confirm \
     direnv \
     shellcheck \
     rlwrap \
-    tidy
+    tidy \
+    docker \
+    docker-compose \
+    docker-machine
 
 echo "Downloading dotfiles from repo...."
 cd $HOME
@@ -73,3 +76,9 @@ asdf reshim
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 ~/.emacs.d/bin/doom install
 ~/.emacs.d/bin/doom sync
+
+#### Configure docker
+sudo usermod -aG docker $USER
+
+#### Reboot to reload new kernel modules safely
+reboot

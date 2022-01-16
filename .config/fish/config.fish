@@ -15,4 +15,6 @@ if status is-interactive
 
   # Add custom alias to deal with dotfiles
   alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+  alias telegram='flatpak run org.telegram.desktop'
 end
