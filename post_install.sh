@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Downloading packages dependencies"
 pamac install --no-confirm \
     emacs \
     flatpak \
@@ -22,7 +21,6 @@ pamac install --no-confirm \
     docker-compose \
     docker-machine
 
-echo "Downloading dotfiles from repo...."
 cd $HOME
 echo ".cfg" >> .gitignore
 git clone --bare git@github.com:araujorafael/dotfiles.git $HOME/.cfg
@@ -30,7 +28,6 @@ git clone --bare git@github.com:araujorafael/dotfiles.git $HOME/.cfg
 /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout ./
 
 ### Instal base devel....
-echo "Installing base development tools..."
 sudo pacman -Sy base-devel
 
 ### Install and set fish shell as default
@@ -63,7 +60,8 @@ else
 fi
 wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 mv lein $HOME/bin
-chmod a+x ~/bin/lein
+chmod a+x $HOME/bin/lein
+export PATH=$PATH:$HOME/bin
 lein
 
 asdf plugin-add nodejs

@@ -24,5 +24,5 @@ config config --local status.showUntrackedFiles no
 Make the manajro /post install script/ executable and run it
 #+BEGIN_SRC shell
 chmod a+x post_install.sh
-./post_install.shq
+./post_install.sh
 #+END_SRC
