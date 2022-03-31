@@ -34,6 +34,10 @@ sudo pacman -Sy base-devel
 pamac -S fish --no-confirm
 chsh -s /bin/fish
 
+### iinstall fish plugin manager and fish-ssh-agent plugin
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisheir
+fisher install danhper/fish-ssh-agent
+
 ### Install asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 source ~/.asdf/asdf.sh
